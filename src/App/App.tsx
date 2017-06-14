@@ -11,6 +11,7 @@ export class App extends React.Component<{}, any> {
         this.handleChange = this.handleChange.bind(this);
         this.handleClick = this.handleClick.bind(this);
         this.handleDelete = this.handleDelete.bind(this);
+        this.handleEnterPress = this.handleEnterPress.bind(this);
         
     }
     handleChange(event){
@@ -31,6 +32,11 @@ export class App extends React.Component<{}, any> {
             tasks : this.state.tasks.filter((d, i) => i !== index)
         })
     }
+    handleEnterPress(event){
+        if(event.key === "Enter"){
+            this.handleClick();
+        }
+    }
 
     render() {
         let li = this.state.tasks.map((task, index)=>{
@@ -38,7 +44,7 @@ export class App extends React.Component<{}, any> {
         })
         return (
             <div>
-                <input type="text" value={this.state.inputVal} onChange={this.handleChange}/>
+                <input type="text" value={this.state.inputVal} onChange={this.handleChange} onKeyUp={this.handleEnterPress}/>
                 <button onClick={this.handleClick}>Add</button>
                 <ul>
                     {li}
